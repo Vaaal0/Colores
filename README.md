@@ -1,0 +1,2 @@
+# Colores
+Talase aprendizaje automático
