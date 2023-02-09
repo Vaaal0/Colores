@@ -1,0 +1,31 @@
+/* Hoja de estilo que controla la apariencia de la información*/
+
+body{
+	
+	text-align: center;
+ font-family: 'Londrina Outline', cursive;
+	color: orangered;
+	font-size: 50px;
+}
+
+
+body.inicio
+{
+text-align: center;
+	font-family: 'Paytone One', sans-serif;
+	color: floralwhite;
+	background-image: url("fondo f.jpeg");
+
+}
+
+body.myIntro
+{
+	text-align: right;
+	 font-family: 'Londrina Outline', cursive;
+	 	color: floralwhite;
+	font-size: 60px;
+	border-color: black;
+}
+
+
+

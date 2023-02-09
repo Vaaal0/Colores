@@ -1,0 +1,198 @@
+<html> <!-- Esta etiqueta es para hacer comentarios -->
+  <head> <!-- en head va la meta data: la data sobre la data -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <link rel="icon" type="image/png" href="images/icona.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/icona.png" sizes="16x16" />
+    <title>A jugar</title>
+  <link rel ="stylesheet"
+    type= "text/css"  
+    href="styles.css"> 
+<link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
+
+</head>
+</br>
+  <div> Enseña a la cámara un color  </div>
+<body class="colores">
+  </br>
+<div class="nombrenegro">
+  <img src="black.png" width="200" height="200"/>
+  <div class="centrado">Negro es black</div>
+</div>
+
+<style>
+.nombrenegro{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="nombreyellow">
+  <img src="yellow.png" width="200" height="200" />
+  <div class="centrado">Amarillo es yellow</div>
+</div>
+
+<style>
+.nombreyellow{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: black;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="nombreazul">
+  <img src="bluee.png" width="200" height="200"/>
+  <div class="centrado">Azul es blue</div>
+</div>
+
+<style>
+.nombreazul{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="nombrerojo">
+  <img src="red.png" width="200" height="200"/>
+  <div class="centrado">Red es rojo</div>
+</div>
+
+<style>
+.nombrerojo{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="nombrewhite">
+  <img src="white.jpeg" width="200" height="200"/>
+  <div class="centrado">White es blanco</div>
+</div>
+
+<style>
+.nombrewhite{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: black;
+}
+ 
+
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+</style>
+
+<div class="title">
+  <div> Conoce los colores  </div>
+
+
+<script type="text/javascript"> 
+  // Classifier Variable
+  // Classifier Variable
+let classifier;
+// Model URL
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/JzdmKIWOE/';
+
+// Video
+let video;
+let flippedVideo;
+// To store the classification
+  let label = "";
+  let result = label;
+  let sentence = " ";
+
+ // Load the model first
+  function preload() {
+    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
+  }
+
+  function setup() {
+    createCanvas(700, 500);
+    // Create the video
+    video = createCapture(VIDEO);
+    video.size(700, 500);
+    video.hide();
+
+    flippedVideo = ml5.flipImage(video);
+    // Start classifying
+    classifyVideo();
+  }
+
+  function draw() {
+    background(0);
+    // Draw the video
+    image(flippedVideo, 0, 0);
+
+    // Draw the label
+    fill(255);
+    textSize(50);
+    textAlign(CENTER);
+    text(label, width / 2, height - 2);
+  }
+
+  // Get a prediction for the current video frame
+  function classifyVideo() {
+    flippedVideo = ml5.flipImage(video)
+    classifier.classify(flippedVideo, gotResult);
+    flippedVideo.remove();
+
+  }
+
+  // When we get a result
+  function gotResult(error, results) {
+    // If there is an error
+    if (error) {
+      console.error(error);
+      return;
+    }
+    // The results are in an array ordered by confidence.
+    // console.log(results[0]);
+    label = results[0].label;
+    // Classifiy again!
+    classifyVideo();
+  }
+</script>
+
+</body>
+</html>
